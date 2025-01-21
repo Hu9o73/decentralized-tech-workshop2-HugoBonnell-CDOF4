@@ -1,0 +1,3 @@
+When checking the ./Chaton.torrent file, we have a link and unreadable characters, certainly representing the image.
+
+On the other hand, ./partition1.torrent only holds a link, even if the folder partition1 holds the Chaton image.
