@@ -18,9 +18,12 @@ jobs:
 
     # Step 2: Deploy to IPFS using aquiladev/ipfs-action
     - name: Deploy to IPFS
-      uses: aquiladev/ipfs-action@master
+      uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.4
       with:
-        path: ./pinataWebsite/index.html
-        service: pinata
-        pinataKey: ${{ secrets.PINATA_API_KEY }}
-        pinataSecret: ${{ secrets.PINATA_API_SECRET }}
+        pin-name: 'My personal site'
+        path: './build'
+        pinata-api-key: ${{ secrets.PINATA_API_KEY }}
+        pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET }}
+        verbose: true
+        remove-old: false
+
