@@ -16,7 +16,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    # Step 2: Deploy to IPFS using aquiladev/ipfs-action
+    # Step 2: Check if the file exists (debug)
+    - name: Check file existence
+      run: ls -la ./pinataWebsite
+
+    # Step 3: Deploy to IPFS using aquiladev/ipfs-action
     - name: Deploy to IPFS
       uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.4
       with:
@@ -24,6 +28,6 @@ jobs:
         path: './pinataWebsite/index.html'
         pinata-api-key: ${{ secrets.PINATA_API_KEY }}
         pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET }}
-        verbose: false
+        verbose: true
         remove-old: true
 
