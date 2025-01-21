@@ -13,7 +13,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Install dependencies
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install Pinata SDK
       run: npm install @pinata/sdk
 
     - name: Deploy to IPFS with Pinata
@@ -21,17 +26,37 @@ jobs:
         node <<EOF
         const pinataSDK = require('@pinata/sdk');
         const fs = require('fs');
+        const path = require('path');
+        
         const pinata = pinataSDK(process.env.PINATA_API_KEY, process.env.PINATA_API_SECRET);
 
         async function deploy() {
-            const options = {
-                pinataMetadata: { name: 'Decentralized Website' },
-                pinataOptions: { cidVersion: 0 }
-            };
+            const folderPath = './';
+            const files = fs.readdirSync(folderPath);
+            
+            for (const file of files) {
+                const filePath = path.join(folderPath, file);
+                const stats = fs.statSync(filePath);
 
-            const readableStreamForFile = fs.createReadStream('./index.html');
-            const result = await pinata.pinFileToIPFS(readableStreamForFile, options);
-            console.log('Pinned to IPFS:', result);
+                if (stats.isFile()) {
+                    const readableStreamForFile = fs.createReadStream(filePath);
+                    const options = {
+                        pinataMetadata: {
+                            name: file
+                        },
+                        pinataOptions: {
+                            cidVersion: 0
+                        }
+                    };
+
+                    try {
+                        const result = await pinata.pinFileToIPFS(readableStreamForFile, options);
+                        console.log(`File pinned: ${file} - CID: ${result.IpfsHash}`);
+                    } catch (error) {
+                        console.error(`Error pinning file: ${file}`, error);
+                    }
+                }
+            }
         }
 
         deploy().catch(console.error);
