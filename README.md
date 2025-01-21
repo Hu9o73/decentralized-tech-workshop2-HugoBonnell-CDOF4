@@ -1,6 +1,8 @@
 # Decentralized Technologies Workshop2 
 Hugo Bonnell - CDOF4
 
+Pinata Link : [LINK](https://sapphire-dear-tyrannosaurus-244.mypinata.cloud/files/bafkreictu35sx5z4t55nnldrp5x43jrth3s64w7mim54swn2laothf5zea?X-Algorithm=PINATA1&X-Date=1737468295&X-Expires=30&X-Method=GET&X-Signature=5ae2b2a77f7e63e2686b507b30baa0fcb0a99685054fddf3b882bb6bbd7ccf05)
+
 ## Objectives
 - Understand the pros and cons of the BitTorrent, IPFS, Filecoin, and Arweave protocols.
 - Be able to deploy files on these protocols and understand how the files and data are saved.
