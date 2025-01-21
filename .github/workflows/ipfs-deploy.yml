@@ -24,7 +24,7 @@ jobs:
     - name: Deploy to IPFS
       uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.4
       with:
-        pin-name: 'index.html'
+        pin-name: 'index2.html'
         path: './pinataWebsite/index.html'
         pinata-api-key: ${{ secrets.PINATA_API_KEY }}
         pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET }}
