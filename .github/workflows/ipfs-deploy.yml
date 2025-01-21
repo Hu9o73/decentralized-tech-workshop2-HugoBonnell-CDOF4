@@ -20,10 +20,10 @@ jobs:
     - name: Deploy to IPFS
       uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.4
       with:
-        pin-name: 'My personal site'
+        pin-name: 'index.html'
         path: './pinataWebsite/index.html'
         pinata-api-key: ${{ secrets.PINATA_API_KEY }}
         pinata-secret-api-key: ${{ secrets.PINATA_API_SECRET }}
-        verbose: true
-        remove-old: false
+        verbose: false
+        remove-old: true
 
