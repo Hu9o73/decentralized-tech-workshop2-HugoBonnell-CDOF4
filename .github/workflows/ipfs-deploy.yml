@@ -1,7 +1,26 @@
-- name: Deploy to IPFS
-  uses: aquiladev/ipfs-action@master
-  with:
-    path: ./pinataWebsite/index.html
-    service: pinata
-    pinataKey: ${{ secrets.PINATA_API_KEY }}
-    pinataSecret: ${{ secrets.PINATA_API_SECRET }}
+name: Deploy to IPFS
+
+# Trigger the workflow on pushes to the main branch or manually via the GitHub UI.
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Step 2: Deploy to IPFS using aquiladev/ipfs-action
+    - name: Deploy to IPFS
+      uses: aquiladev/ipfs-action@master
+      with:
+        path: ./pinataWebsite/index.html
+        service: pinata
+        pinataKey: ${{ secrets.PINATA_API_KEY }}
+        pinataSecret: ${{ secrets.PINATA_API_SECRET }}
